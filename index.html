@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Comentários</title>
+</head>
+<body>
+    <h1>Comentários</h1>
+    <form action="/comentar" method="post">
+        <textarea name="comentario" rows="4" cols="50" placeholder="Escreva seu comentário aqui..." required></textarea><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Comentários salvos:</h2>
+    <pre>{{comentarios}}</pre>
+</body>
+</html>
