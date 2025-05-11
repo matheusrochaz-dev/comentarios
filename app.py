@@ -1,22 +1,15 @@
-from flask import Flask, request, redirect
-import os
+from flask import Flask, request, redirect, url_for, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     try:
         with open("index.txt", "r", encoding="utf-8") as f:
-            comentarios = f.read()
+            comentarios = f.read().replace("\n", "<br>")
     except FileNotFoundError:
         comentarios = "Nenhum comentário ainda."
-
-    # Lê o HTML base
-    with open("index.html", "r", encoding="utf-8") as f:
-        html = f.read()
-
-    # Insere os comentários no lugar da variável
-    return html.replace("{{comentarios}}", comentarios)
+    return render_template("index.html", comentarios=comentarios)
 
 @app.route('/comentar', methods=['POST'])
 def comentar():
@@ -24,7 +17,7 @@ def comentar():
     if comentario:
         with open("index.txt", "a", encoding="utf-8") as f:
             f.write(comentario + "\n\n")
-    return redirect(url_for("index"))
+    return redirect(url_for("index"))  # ✅ Correto
 
 if __name__ == '__main__':
     app.run(debug=True)
