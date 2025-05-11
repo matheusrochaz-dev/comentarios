@@ -24,7 +24,7 @@ def comentar():
     if comentario:
         with open("index.txt", "a", encoding="utf-8") as f:
             f.write(comentario + "\n\n")
-    return redirect('/')
+    return redirect(index.html)
 
 if __name__ == '__main__':
     app.run(debug=True)
